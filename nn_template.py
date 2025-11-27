@@ -112,7 +112,9 @@ class SimpleCardClassifer(nn.Module):
 # 数据准备
 
 transform = transforms.Compose([
+    # Resize((128, 128))：把输入图像缩放到 128 像素高、128 像素宽
     transforms.Resize((128, 128)),
+    # ToTensor()：把图像从 PIL.Image 或 numpy.ndarray 格式转换为 PyTorch 张量（Tensor），并将图像的像素值从 0–255 缩放到 0–1 范围
     transforms.ToTensor(),
 ])
 
