@@ -53,6 +53,10 @@ import pandas as pd
 print('Pandas version', pd.__version__)
 
 # ================================================
+# 设置随机种子，确保实验的可重复性
+_ = torch.manual_seed(0)
+
+# ================================================
 # 自定义数据集类，继承自 PyTorch 的 Dataset 类
 class PlayingCardDataset(Dataset):
     def __init__(self, data_dir, transform=None):
@@ -117,6 +121,19 @@ transform = transforms.Compose([
     # ToTensor()：把图像从 PIL.Image 或 numpy.ndarray 格式转换为 PyTorch 张量（Tensor），并将图像的像素值从 0–255 缩放到 0–1 范围
     transforms.ToTensor(),
 ])
+
+# transform = transforms.Compose([
+#     # MINST 数据集的数值范围是 0-255 的灰度图像,经过 ToTensor() 转换后变为 0-1 范围的张量
+#     transforms.ToTensor(),
+#
+#     # 归一化处理：使用均值 0.1307 和标准差 0.3081 对图像进行归一化
+#     # MNIST 全体像素均值：0.1307
+#     # MNIST 全体像素标准差：0.3081
+#     transforms.Normalize((0.1307,), (0.3081,))
+#     # MNIST 是灰度图像，因此均值和标准差都是单通道的元组
+#     # 如果是 RGB 彩色图像，则需要提供三个通道的均值和标准差，例如：((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
+#     # transforms.Normalize((mean_R, mean_G, mean_B), (std_R, std_G, std_B))
+# ])
 
 train_folder = '/home/cc/workspace/my_project/python_project/dataset/cards_dataset/train/'
 valid_folder = '/home/cc/workspace/my_project/python_project/dataset/cards_dataset/valid/'
